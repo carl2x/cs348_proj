@@ -2,9 +2,13 @@ $(document).ready(function () {
     // example: https://getbootstrap.com/docs/4.2/components/modal/
     // show modal
     $('#task-modal').on('show.bs.modal', function (event) {
-        const button = $(event.relatedTarget) // Button that triggered the modal
-        const taskID = button.data('source') // Extract info from data-* attributes
-        const content = button.data('content') // Extract info from data-* attributes
+        // Button that triggered the modal
+        const button = $(event.relatedTarget)
+        // Extract info from data-* attributes
+        const taskID = button.data('source') // could be item id or 'New Task'
+        const task = button.data('task')
+        const priority = button.data('priority')
+        const duration = button.data('duration')
 
         const modal = $(this)
         if (taskID === 'New Task') {
@@ -15,10 +19,22 @@ $(document).ready(function () {
             $('#task-form-display').attr('taskID', taskID)
         }
 
-        if (content) {
-            modal.find('.form-control').val(content);
+        if (task) {
+            modal.find('.form-control').val(task);
         } else {
             modal.find('.form-control').val('');
+        }
+
+        if (priority) {
+            $('#priority-select').val(priority);
+        } else {
+            $('#priority-select').val('');
+        }
+
+        if (priority) {
+            $('#duration-input').val(duration);
+        } else {
+            $('#duration-input').val('');
         }
     })
 
@@ -26,12 +42,16 @@ $(document).ready(function () {
     $('#submit-task').click(function () {
         const tID = $('#task-form-display').attr('taskID');
         console.log($('#task-modal').find('.form-control').val())
+        console.log($('#priority-select').val())
+        console.log($('#duration-input').val())
         $.ajax({
             type: 'POST',
             url: tID ? '/edit/' + tID : '/create',
             contentType: 'application/json;charset=UTF-8',
             data: JSON.stringify({
-                'description': $('#task-modal').find('.form-control').val()
+                'task': $('#task-modal').find('.form-control').val(),
+                'priority': $('#priority-select').val(),
+                'duration': $('#duration-input').val()
             }),
             success: function (res) {
                 console.log(res.response)
@@ -61,7 +81,7 @@ $(document).ready(function () {
     $('.state').click(function () {
         const state = $(this)
         const tID = state.data('source')
-        const new_state = "Todo"
+        let new_state = "Todo"
         if (state.text() === "In Progress") {
             new_state = "Complete"
         } else if (state.text() === "Complete") {

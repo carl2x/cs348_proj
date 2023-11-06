@@ -19,15 +19,15 @@ def delete(task_id):
 @app.route("/edit/<int:task_id>", methods=['POST'])
 def update(task_id):
     """ recieved post requests for entry updates """
-
     data = request.get_json()
 
     try:
+        # new tasks won't have status in data cuz default is TodoA
         if "status" in data:
             db_helper.update_status_entry(task_id, data["status"])
             result = {'success': True, 'response': 'Status Updated'}
-        elif "description" in data:
-            db_helper.update_task_entry(task_id, data["description"])
+        elif "task" in data:
+            db_helper.update_task_entry(task_id, data)
             result = {'success': True, 'response': 'Task Updated'}
         else:
             result = {'success': True, 'response': 'Nothing Updated'}
@@ -41,7 +41,7 @@ def update(task_id):
 def create():
     """ recieves post requests to add new task """
     data = request.get_json()
-    db_helper.insert_new_task(data['description'])
+    db_helper.insert_new_task(data)
     result = {'success': True, 'response': 'Done'}
     return jsonify(result)
 

@@ -41,7 +41,7 @@ hr {
 /* bootstrap modifications */
 .container {
     width: auto;
-    max-width: 680px;
+    max-width: 880px;
     padding: 0 15px;
 }
 
@@ -49,16 +49,24 @@ hr {
     padding-bottom: 2em;
 }
 
+/* .task-id {
+    width: 10%;
+} */
+
 .task {
     width: 50%;
 }
 
-.task-id {
+.status {
+    width: 15%;
+}
+
+.priority {
     width: 10%;
 }
 
-.status {
-    width: 20%;
+.duration {
+    width: 5%;
 }
 
 .update {

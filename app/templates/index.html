@@ -14,14 +14,13 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/custom.css') }}">
-
 </head>
 
 <body>
 
     <main role="main" class="container extra-bottom">
-        <h1 class="mt-5">TODO List Demo App</h1>
-        <p><mark>Do it now.</mark></p>
+        <h1 class="mt-5">TodoHub</h1>
+        <p><mark>Do it now!</mark></p>
     </main>
 
 
@@ -38,7 +37,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="Label">Add a task</h5>
+                        <h5 class="modal-title" id="Label">Add/Edit a task</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
@@ -47,6 +46,19 @@
                             <span class="input-group-text" id="task-form-display">Task</span>
                             <input type="text" class="form-control" placeholder="Description of task"
                                 aria-label="task-name" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="priority-select">Priority</label>
+                            <select class="form-select" id="priority-select">
+                                <option selected value="">Choose...</option>
+                                <option value="Now">Now</option>
+                                <option value="High">High</option>
+                                <option value="Low">Low</option>
+                            </select>
+                        </div>
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="duration-input">Duration</label>
+                            <input type="number" class="form-control" id="duration-input" placeholder="Enter estimated duration in minutes" min="1">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -64,9 +76,10 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th class="task-id">#</th>
-                    <th class="task">Task Name</th>
+                    <th class="task">Task</th>
                     <th class="status">Status</th>
+                    <th class="priority">Priority</th>
+                    <th class="duration">Duration</th>
                     <th class="update">Edit</th>
                     <th class="update">Remove</th>
                 </tr>
@@ -75,24 +88,37 @@
             <tbody>
                 {% for item in items %}
                 <tr>
-                    <td>{{item.id}}</td>
                     <td>{{item.task}}</td>
 
                     {% if item.status == "In Progress" %}
                     <td><button type="button" class="btn btn-outline-warning btn-sm state"
                             data-source="{{item.id}}">{{item.status}}</button></td>
-                    {%endif%}
-                    {% if item.status == "Todo" %}
+                    {% elif item.status == "Todo" %}
                     <td><button type="button" class="btn btn-outline-secondary btn-sm state"
                             data-source="{{item.id}}">{{item.status}}</button></td>
-                    {%endif%}
-                    {% if item.status == "Complete" %}
+                    {% elif item.status == "Complete" %}
                     <td><button type="button" class="btn btn-outline-success btn-sm state"
                             data-source="{{item.id}}">{{item.status}}</button></td>
                     {%endif%}
 
+                    <td>
+                        {% if item.priority == "Now" %}
+                        <span class="text-danger">{{item.priority}}</span>
+                        {% elif item.priority == "High" %}
+                        <span class="text-warning">{{item.priority}}</span>
+                        {% elif item.priority == "Low" %}
+                        <span class="text-success">{{item.priority}}</span>
+                        {% else %}
+                        {{item.priority}}
+                        {% endif %}
+                    </td>
+
+                    <td>{{item.duration}}</td>
+
                     <td><button type="button" class="btn btn-outline-info btn-sm" data-bs-toggle="modal"
-                            data-bs-target="#task-modal" data-source="{{item.id}}" data-content="{{item.task}}"><i
+                            data-bs-target="#task-modal" data-source="{{item.id}}" data-task="{{item.task}}"
+                            data-priority="{{item.priority}}" data-duration="{{item.duration}}"
+                            ><i
                                 class="fa fa-pen fa-1" aria-hidden="true"></i></button></td>
 
                     <td><button class="btn btn-outline-secondary btn-sm remove" data-source="{{item.id}}"
