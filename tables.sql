@@ -9,6 +9,10 @@ CREATE TABLE tasks (
     duration int,
     PRIMARY KEY (id)
 );
+
+CREATE INDEX idx_tasks_task ON tasks(task);
+CREATE INDEX idx_tasks_status ON tasks(status);
+
 INSERT INTO tasks (task, status, priority, duration) 
 VALUES ("task no.1", "Todo", "High", 120);
 Select * from tasks;
