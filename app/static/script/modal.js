@@ -31,7 +31,7 @@ $(document).ready(function () {
             $('#priority-select').val('');
         }
 
-        if (priority) {
+        if (duration) {
             $('#duration-input').val(duration);
         } else {
             $('#duration-input').val('');
@@ -40,10 +40,16 @@ $(document).ready(function () {
 
 
     $('#submit-task').click(function () {
+        const task = $('#task-modal').find('.form-control').val()
+        const priority = $('#priority-select').val()
+        const duration = $('#duration-input').val()
+        console.log(task, priority, duration)
+        // accounts for number only inputs
+        if (!task || !priority || !duration) {
+            alert('All fields must be filled out correctly.');
+            return;
+        }
         const tID = $('#task-form-display').attr('taskID');
-        console.log($('#task-modal').find('.form-control').val())
-        console.log($('#priority-select').val())
-        console.log($('#duration-input').val())
         $.ajax({
             type: 'POST',
             url: tID ? '/edit/' + tID : '/create',

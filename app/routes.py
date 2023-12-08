@@ -22,7 +22,6 @@ def update(task_id):
     data = request.get_json()
 
     try:
-        # new tasks won't have status in data cuz default is TodoA
         if "status" in data:
             db_helper.update_status_entry(task_id, data["status"])
             result = {'success': True, 'response': 'Status Updated'}
@@ -50,4 +49,5 @@ def create():
 def homepage():
     """ returns rendered homepage """
     items = db_helper.fetch_todo()
+    print(items)
     return render_template("index.html", items=items)
