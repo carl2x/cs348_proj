@@ -26,8 +26,8 @@
             <li><strong>Total TODOs:</strong> {{ report.total_todos }}</li>
             <li><strong>Total Completed:</strong> {{ report.total_completed }}</li>
             <li><strong>Total In Progress:</strong> {{ report.total_in_progress }}</li>
-            <li><strong>Completion Rate:</strong> {{ report.completion_rate * 100 }}%</li>
-            <li><strong>Average Duration:</strong> {{ report.avg_duration }} minutes</li>
+            <li><strong>Completion Rate:</strong> {{ (report.completion_rate * 100)|round(1) }}%</li>
+            <li><strong>Average Duration:</strong> {{ (report.avg_duration)|round(1) }} minutes</li>
         </ul>
         {% else %}
         <p>No report available</p>

@@ -26,6 +26,4 @@ CREATE TABLE reports (
     PRIMARY KEY (id)
 );
 
-INSERT INTO tasks (task, status, priority, duration) 
-VALUES ("task no.1", "Todo", "High", 120);
 Select * from tasks;

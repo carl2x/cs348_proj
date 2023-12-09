@@ -11,7 +11,7 @@ def fetch_todo() -> list:
     """
 
     conn = db.connect()
-    query_results = conn.execute(text("Select * from tasks;")).fetchall()
+    query_results = conn.execute(text("SELECT * FROM tasks ORDER BY id DESC;")).fetchall()
     conn.close()
     todo_list = []
     for result in query_results:
