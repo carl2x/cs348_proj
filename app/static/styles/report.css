@@ -1,0 +1,28 @@
+.container {
+    margin-top: 2em;
+}
+
+.table {
+    width: 100%;
+    margin-top: 1em;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+
+.subtitle {
+    font-size: 1.5em;
+    color: #777;
+}

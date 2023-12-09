@@ -69,6 +69,27 @@ $(document).ready(function () {
         });
     });
 
+    $('#generate-report').click(function () {
+        const priority = $('#prioritySelect').val()
+        console.log(priority)
+        $.ajax({
+            type: 'POST',
+            url: '/generate-report',
+            contentType: 'application/json;charset=UTF-8',
+            data: JSON.stringify({
+                'priority': priority
+            }),
+            success: function (res) {
+                console.log(res.response)
+                // Redirect to /report
+                window.location.href = '/report';
+            },
+            error: function () {
+                console.log('Error');
+            }
+        });
+    });
+
     $('.remove').click(function () {
         const remove = $(this)
         $.ajax({

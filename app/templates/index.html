@@ -17,7 +17,6 @@
 </head>
 
 <body>
-
     <main role="main" class="container extra-bottom">
         <h1 class="mt-5">TodoHub</h1>
         <p><mark>Do it now!</mark></p>
@@ -25,6 +24,40 @@
 
 
     <div class="container">
+        <!-- Button trigger modal -->
+        <div style="text-align: left;">
+            <button type="button" class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-bs-target="#report-modal"
+                data-source="New Report">Generate Report</button>
+        </div>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="report-modal" tabindex="-1" aria-labelledby="reportLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="reportLabel">Generate a Report</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="prioritySelect">Do statistics on tasks with priority:</label>
+                                <select class="form-control" id="prioritySelect">
+                                    <option selected>All</option>
+                                    <option>Now</option>
+                                    <option>High</option>
+                                    <option>Low</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button id="generate-report" type="button" class="btn btn-primary">Generate</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Button trigger modal -->
         <div style="text-align: right;">
@@ -32,7 +65,7 @@
                 data-bs-target="#task-modal" data-source="New Task">Add Task</button>
         </div>
 
-
+        <!-- Modal -->
         <div class="modal fade" id="task-modal" tabindex="-1" aria-labelledby="Label" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">

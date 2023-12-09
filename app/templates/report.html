@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="icon" href="{{ url_for('static', filename='img/todo.ico') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/report.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+            <h1>TodoHub Report </h1>
+            <h2 class="subtitle">Priority Level: {{ report.priority }}</h2>
+            <a href="/" class="btn btn-primary">Home</a>
+        </div>
+        
+        {% if report %}
+        <ul class="report-list">
+            <li><strong>Total TODOs:</strong> {{ report.total_todos }}</li>
+            <li><strong>Total Completed:</strong> {{ report.total_completed }}</li>
+            <li><strong>Total In Progress:</strong> {{ report.total_in_progress }}</li>
+            <li><strong>Completion Rate:</strong> {{ report.completion_rate * 100 }}%</li>
+            <li><strong>Average Duration:</strong> {{ report.avg_duration }} minutes</li>
+        </ul>
+        {% else %}
+        <p>No report available</p>
+        {% endif %}
+        <div class="mt-5 text-center">
+            <h2>Good Job!</h2>
+            <p>Keep up the good work!</p>
+        </div>
+    </div>
+</body>
+
+</html>
