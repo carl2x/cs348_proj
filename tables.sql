@@ -11,7 +11,6 @@ CREATE TABLE tasks (
     PRIMARY KEY (id)
 );
 
-CREATE INDEX idx_tasks_task ON tasks(task);
 CREATE INDEX idx_tasks_status ON tasks(status);
 CREATE INDEX idx_tasks_priority ON tasks(priority);
 
